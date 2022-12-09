@@ -47,8 +47,39 @@ module Result =
     | Ok ok -> Ok ok
     | Error error -> f error
 
+  let inline bind2
+    (f: 'a -> 'b -> Result<'c, 'e>)
+    (result1: Result<'a, 'e>)
+    (result2: Result<'b, 'e>)
+    : Result<'c, 'e> =
+    result {
+      let! result1 = result1
+      let! result2 = result2
+      return! f result1 result2
+    }
+
+  let inline bind3
+    (f: 'a -> 'b -> 'c -> Result<'d, 'e>)
+    (result1: Result<'a, 'e>)
+    (result2: Result<'b, 'e>)
+    (result3: Result<'c, 'e>)
+    : Result<'d, 'e> =
+    result {
+      let! result1 = result1
+      let! result2 = result2
+      let! result3 = result3
+      return! f result1 result2 result3
+    }
+
   let inline zip (result1: Result<'a, 'e>) (result2: Result<'b, 'e>) : Result<'a * 'b, 'e> =
     result.MergeSources(result1, result2)
+
+  let inline zip3
+    (result1: Result<'a, 'e>)
+    (result2: Result<'b, 'e>)
+    (result3: Result<'c, 'e>)
+    : Result<'a * 'b * 'c, 'e> =
+    result.MergeSources3(result1, result2, result3)
 
   let inline ofOption (error: 'e) (option: 'a option) : Result<'a, 'e> =
     match option with
