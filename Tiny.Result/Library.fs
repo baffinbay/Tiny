@@ -48,7 +48,7 @@ module Result =
     | Error error -> f error
 
   let inline bind2
-    (f: 'a -> 'b -> Result<'c, 'e>)
+    ([<InlineIfLambda>] f: 'a -> 'b -> Result<'c, 'e>)
     (result1: Result<'a, 'e>)
     (result2: Result<'b, 'e>)
     : Result<'c, 'e> =
@@ -59,7 +59,7 @@ module Result =
     }
 
   let inline bind3
-    (f: 'a -> 'b -> 'c -> Result<'d, 'e>)
+    ([<InlineIfLambda>] f: 'a -> 'b -> 'c -> Result<'d, 'e>)
     (result1: Result<'a, 'e>)
     (result2: Result<'b, 'e>)
     (result3: Result<'c, 'e>)
