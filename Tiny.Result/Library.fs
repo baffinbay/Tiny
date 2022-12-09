@@ -4,14 +4,12 @@ module Result =
 
   let inline singleton (value: 'a) : Result<'a, 'e> = result { return value }
 
-  let inline apply (f: Result<'a -> 'b, 'e>) (result: Result<'a, 'e>) : Result<'b, 'e> =
+  let inline andMap (result: Result<'a, 'e>) (f: Result<'a -> 'b, 'e>) : Result<'b, 'e> =
     ResultCE.result {
       let! f = f
       and! result = result
       return f result
     }
-
-  let inline andMap (r: Result<'a, 'e>) (f: Result<'a -> 'b, 'e>) : Result<'b, 'e> = apply f r
 
   let inline map2
     ([<InlineIfLambda>] f: 'a -> 'b -> 'c)
