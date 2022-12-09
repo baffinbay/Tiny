@@ -52,11 +52,7 @@ module Result =
     (result1: Result<'a, 'e>)
     (result2: Result<'b, 'e>)
     : Result<'c, 'e> =
-    result {
-      let! result1 = result1
-      let! result2 = result2
-      return! f result1 result2
-    }
+    result.Bind2(result1, result2, (fun (a, b) -> f a b))
 
   let inline bind3
     ([<InlineIfLambda>] f: 'a -> 'b -> 'c -> Result<'d, 'e>)
@@ -64,12 +60,7 @@ module Result =
     (result2: Result<'b, 'e>)
     (result3: Result<'c, 'e>)
     : Result<'d, 'e> =
-    result {
-      let! result1 = result1
-      let! result2 = result2
-      let! result3 = result3
-      return! f result1 result2 result3
-    }
+    result.Bind3(result1, result2, result3, (fun (a, b, c) -> f a b c))
 
   let inline zip (result1: Result<'a, 'e>) (result2: Result<'b, 'e>) : Result<'a * 'b, 'e> =
     result.MergeSources(result1, result2)
