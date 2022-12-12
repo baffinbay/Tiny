@@ -1,5 +1,6 @@
 ﻿namespace Tiny.Result
 
+[<RequireQualifiedAccess>]
 module Result =
 
   let inline singleton (value: 'a) : Result<'a, 'e> = result { return value }
@@ -62,6 +63,8 @@ module Result =
     : Result<'d, 'e> =
     result.Bind3(result1, result2, result3, (fun (a, b, c) -> f a b c))
 
+  let inline traverse (f:'a ->  Result<'b,'e>) ()
+  
   let inline zip (result1: Result<'a, 'e>) (result2: Result<'b, 'e>) : Result<'a * 'b, 'e> =
     result.MergeSources(result1, result2)
 
