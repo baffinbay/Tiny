@@ -62,7 +62,7 @@ module ResultCE =
 
     member inline this.Using
       (
-        disposable: 'a :> #System.IDisposable,
+        disposable: 'a :> System.IDisposable,
         [<InlineIfLambda>] f: 'a -> Result<'b, 'e>
       ) : Result<'b, 'e> =
       this.TryFinally(
