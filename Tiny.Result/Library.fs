@@ -1,5 +1,6 @@
 ﻿namespace Tiny.Result
 
+<<<<<<< HEAD
 module Result =
 
   let inline singleton (value: 'a) : Result<'a, 'e> = result { return value }
@@ -98,3 +99,7 @@ module Result =
       Ok(f a)
     with exn ->
       Error exn
+=======
+module Say =
+  let hello name = printfn "Hello %s" name
+>>>>>>> main
