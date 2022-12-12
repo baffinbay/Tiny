@@ -1,19 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-<<<<<<< HEAD
     <TargetFramework>netstandard2.0</TargetFramework>
-=======
     <TargetFramework>net6.0</TargetFramework>
->>>>>>> main
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="CE.fs" />
-=======
->>>>>>> main
     <Compile Include="Library.fs" />
   </ItemGroup>
 
