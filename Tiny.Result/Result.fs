@@ -83,8 +83,6 @@ module Result =
     }
 #endif
 
-
-
   let inline zip (result1: Result<'a, 'e>) (result2: Result<'b, 'e>) : Result<'a * 'b, 'e> =
     result.MergeSources(result1, result2)
 
