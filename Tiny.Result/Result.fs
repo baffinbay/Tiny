@@ -63,8 +63,28 @@ module Result =
     : Result<'d, 'e> =
     result.Bind3(result1, result2, result3, (fun (a, b, c) -> f a b c))
 
-  let inline traverse (f:'a ->  Result<'b,'e>) ()
-  
+  let inline sequence (results: Result<'a, 'e> list) : Result<'a list, 'e> =
+#if FABLE_COMPILER
+    let rec loop state =
+      function
+      | [] -> state |> List.rev |> singleton
+      | r :: rs -> r |> Result.bind (fun a -> loop (a :: state) rs)
+
+    loop [] results
+#else
+    result {
+      let mutable collector = FSharp.Core.CompilerServices.ListCollector<'a>()
+
+      for r in results do
+        let! a = r
+        collector.Add a
+
+      return collector.Close()
+    }
+#endif
+
+
+
   let inline zip (result1: Result<'a, 'e>) (result2: Result<'b, 'e>) : Result<'a * 'b, 'e> =
     result.MergeSources(result1, result2)
 
