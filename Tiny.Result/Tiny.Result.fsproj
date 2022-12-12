@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Compile Include="CE.fs" />
-    <Compile Include="Library.fs" />
+    <Compile Include="Result.fs" />
   </ItemGroup>
 
 </Project>
