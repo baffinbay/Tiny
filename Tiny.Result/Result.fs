@@ -5,13 +5,6 @@ module Result =
 
   let inline singleton (value: 'a) : Result<'a, 'e> = result { return value }
 
-  let inline andMap (result: Result<'a, 'e>) (f: Result<'a -> 'b, 'e>) : Result<'b, 'e> =
-    ResultCE.result {
-      let! f = f
-      and! result = result
-      return f result
-    }
-
   let inline map2
     ([<InlineIfLambda>] f: 'a -> 'b -> 'c)
     (result1: Result<'a, 'e>)
@@ -42,6 +35,8 @@ module Result =
     (result: Result<'a, 'e1>)
     : Result<'b, 'e2> =
     (Result.map f >> Result.mapError g) result
+
+  let inline apply (f: Result<'a -> 'b, 'e>) (result: Result<'a, 'e>) : Result<'b, 'e> = map2 (|>) result f
 
   let inline bindError ([<InlineIfLambda>] f: 'e1 -> Result<'a, 'e2>) (result: Result<'a, 'e1>) : Result<'a, 'e2> =
     match result with
