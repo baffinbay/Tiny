@@ -5,23 +5,21 @@ module Result =
 
   let inline singleton (value: 'a) : Result<'a, 'e> = result { return value }
 
-  let inline andMap (result: Result<'a, 'e>) (f: Result<'a -> 'b, 'e>) : Result<'b, 'e> =
+  let inline apply (f: Result<'a -> 'b, 'e>) (result: Result<'a, 'e>) : Result<'b, 'e> =
     ResultCE.result {
       let! f = f
-      and! result = result
-      return f result
+      and! r = result
+      return f r
     }
+
+  let inline andMap (result: Result<'a, 'e>) (f: Result<'a -> 'b, 'e>) : Result<'b, 'e> = apply f result
 
   let inline map2
     ([<InlineIfLambda>] f: 'a -> 'b -> 'c)
     (result1: Result<'a, 'e>)
     (result2: Result<'b, 'e>)
     : Result<'c, 'e> =
-    result {
-      let! r1 = result1
-      and! r2 = result2
-      return f r1 r2
-    }
+    singleton f |> andMap result1 |> andMap result2
 
   let inline map3
     ([<InlineIfLambda>] f: 'a -> 'b -> 'c -> 'd)
@@ -29,12 +27,7 @@ module Result =
     (result2: Result<'b, 'e>)
     (result3: Result<'c, 'e>)
     : Result<'d, 'e> =
-    result {
-      let! r1 = result1
-      and! r2 = result2
-      and! r3 = result3
-      return f r1 r2 r3
-    }
+    singleton f |> andMap result1 |> andMap result2 |> andMap result3
 
   let inline bimap
     ([<InlineIfLambda>] f: 'a -> 'b)
