@@ -56,7 +56,9 @@ module Async =
       return f a b c
     }
 
-  let inline andMap (asyncOp: Async<'a>) (f: Async<'a -> 'b>) : Async<'b> = map2 (|>) asyncOp f
+  let inline apply (f: Async<'a -> 'b>) (asyncOp: Async<'a>) : Async<'b> = map2 (|>) asyncOp f
+
+  let inline andMap (asyncOp: Async<'a>) (f: Async<'a -> 'b>) : Async<'b> = apply f asyncOp
 
   let inline zip (asyncOp1: Async<'a>) (asyncOp2: Async<'b>) : Async<'a * 'b> =
     async {
