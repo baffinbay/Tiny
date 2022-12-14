@@ -9,6 +9,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tiny.Result.Tests", "Tiny.R
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tiny.Async", "Tiny.Async\Tiny.Async.fsproj", "{A5111833-B380-4950-87C6-152EE2E47E12}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tiny.AsyncResult", "Tiny.AsyncResult\Tiny.AsyncResult.fsproj", "{4CC600F6-0410-43B4-85DB-249981CE4541}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{A5111833-B380-4950-87C6-152EE2E47E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5111833-B380-4950-87C6-152EE2E47E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5111833-B380-4950-87C6-152EE2E47E12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CC600F6-0410-43B4-85DB-249981CE4541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CC600F6-0410-43B4-85DB-249981CE4541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CC600F6-0410-43B4-85DB-249981CE4541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CC600F6-0410-43B4-85DB-249981CE4541}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
